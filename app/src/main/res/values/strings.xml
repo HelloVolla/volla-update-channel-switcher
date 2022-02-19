@@ -1,0 +1,7 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Updates Channel Switcher</string>
+    <string name="override_text">Override channel to:</string>
+    <string name="top_text">Current installed OS is from channel <xliff:g id="current">%1$s</xliff:g></string>
+    <string name="switched_text">Switched channel to <xliff:g id="switched">%1$s</xliff:g></string>
+    <string name="failed_text">Failed to Switch channel</string>
+</resources>
