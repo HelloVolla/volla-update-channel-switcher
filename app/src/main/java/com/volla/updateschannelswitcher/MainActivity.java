@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -104,5 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        boolean devOptionsEnabled = Settings.Secure.getInt(this.getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0) == 1;
+        if (!devOptionsEnabled) {
+            chSpinner.setEnabled(false);
+            TextView devTextView = (TextView) findViewById(R.id.dev_textView);
+            devTextView.setVisibility(View.VISIBLE);
+        }
     }
 }

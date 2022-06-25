@@ -4,4 +4,5 @@
     <string name="top_text">Current installed OS is from channel <xliff:g id="current">%1$s</xliff:g></string>
     <string name="switched_text">Switched channel to <xliff:g id="switched">%1$s</xliff:g></string>
     <string name="failed_text">Failed to Switch channel</string>
+    <string name="devsettings_text">Enable Developer settings for switching channels</string>
 </resources>

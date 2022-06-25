@@ -37,4 +37,16 @@
         app:layout_constraintRight_toLeftOf="@+id/channel_spinner"
         app:layout_constraintTop_toTopOf="@+id/channel_spinner" />
 
+    <TextView
+        android:id="@+id/dev_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/devsettings_text"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/channel_spinner"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
