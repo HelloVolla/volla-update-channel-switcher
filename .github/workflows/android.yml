@@ -1,0 +1,37 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Signed APK
+        uses: victorbnl/build-signed-apk@main
+        with:
+            keystore_b64: ${{ secrets.ANDROID_KEYSTORE_FILE_CONTENTS }}
+            keystore_password: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+            key_alias: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+            key_password: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+
+      - run: find app/build/outputs/apk/
+      - run: mkdir -p releases && mv app/build/outputs/apk/release/app-release.apk releases/com.volla.updateschannelswitcher-`git rev-parse --short HEAD`.apk
+
+      - name: Upload Apk to Nightly Repository
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: 'drone'
+          server: 'volla.tech'
+          port: 2222
+          ssh_private_key: '${{ secrets.FDROID_DEPLOY_KEY }}'
+          local_path: './releases/*.apk'
+          remote_path: '/builds/nightly/volla/volla-update-channel-switcher/'
+          args: '-o CheckHostIP=no -o StrictHostKeyChecking=no'
